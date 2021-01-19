@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login } from '../store/actions/authAction';
 
 
 export class Login extends Component {
@@ -16,8 +18,21 @@ export class Login extends Component {
         })
     }
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if(JSON.stringify(nextProps.auth.error) !== JSON.stringify(prevState.error)){
+            return {
+                error: nextProps.auth.error
+            }
+        }
+        return null
+    }
+
     submitHandler = event => {
         event.preventDefault()
+        this.props.login({
+            username: this.state.username,
+            password: this.state.password
+        }, this.props.history)
     }
 
     render() {
@@ -34,22 +49,24 @@ export class Login extends Component {
                                 <div className="form-group">
                                     <label htmlFor="username">Enter usenrame name</label>
                                     <input type="text"
-                                        className="form-control"
+                                        className={error.username ? 'form-control is-invalid': 'form-control'}
                                         placeholder="Enter username"
                                         onChange={this.chagneHandler}
                                         vlaue={username}
                                         name="username"
-                                        />
+                                    />
+                                    {error.username && <div className="invalid-feedback">{error.username}</div>}
                                  </div>
                                  <div className="form-group">
                                     <label htmlFor="password">Enter Password</label>
                                     <input type="password"
-                                        className="form-control"
+                                        className={error.password ? 'form-control is-invalid': 'form-control'}
                                         placeholder="*******************"
                                         onChange={this.chagneHandler}
                                         vlaue={password}
                                         name="password"
-                                        />
+                                    />
+                                    {error.password && <div className="invalid-feedback">{error.password}</div>}
                                  </div>
                                  <button className="btn btn-success btn-sm">Login</button>
                             </form>
@@ -64,4 +81,9 @@ export class Login extends Component {
     }
 }
 
-export default Login
+
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
+export default connect(mapStateToProps, {login}) (Login)
