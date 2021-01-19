@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react';
+import { connect } from 'react-redux';
 import { register } from '../store/actions/authAction';
 
 
@@ -20,10 +20,19 @@ export class Register extends Component {
         })
     }
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if(JSON.stringify(nextProps.auth.error) !== JSON.stringify(prevState.error)){
+            return {
+                error: nextProps.auth.error
+            }
+        }
+        return null
+    }
+
     submitHandler = event => {
         event.preventDefault()
         let { username, email, password, password2 } = this.state
-        this.props.register({username, email, password, password2})
+        this.props.register({username, email, password, password2}, this.props.history)
     }
 
     render() {
@@ -40,42 +49,46 @@ export class Register extends Component {
                                 <div className="form-group">
                                     <label htmlFor="username">Enter your name</label>
                                     <input type="text"
-                                        className="form-control"
+                                        className={error.username ? 'form-control is-invalid': 'form-control'}
                                         placeholder="Enter username"
                                         onChange={this.chagneHandler}
                                         vlaue={username}
                                         name="username"
-                                        />
+                                    />
+                                    {error.username && <div className="invalid-feedback">{error.username}</div>}
                                  </div>
                                  <div className="form-group">
                                     <label htmlFor="email">Enter valid email</label>
                                     <input type="email"
-                                        className="form-control"
+                                        className={error.email ? 'form-control is-invalid': 'form-control'}
                                         placeholder="Enter a valid email"
                                         onChange={this.chagneHandler}
                                         vlaue={email}
                                         name="email"
                                         />
+                                        {error.email && <div className="invalid-feedback">{error.email}</div>}
                                  </div>
                                  <div className="form-group">
                                     <label htmlFor="password">Enter Password</label>
                                     <input type="password"
-                                        className="form-control"
+                                        className={error.password ? 'form-control is-invalid': 'form-control'}
                                         placeholder="*******************"
                                         onChange={this.chagneHandler}
                                         vlaue={password}
                                         name="password"
-                                        />
+                                    />
+                                    {error.password && <div className="invalid-feedback">{error.password}</div>}
                                  </div>
                                   <div className="form-group">
                                     <label htmlFor="password2">Enter Confirm Password</label>
                                     <input type="password"
-                                        className="form-control"
+                                         className={error.password2 ? 'form-control is-invalid': 'form-control'}
                                         placeholder="*******************"
                                         onChange={this.chagneHandler}
                                         vlaue={password2}
                                         name="password2"
-                                        />
+                                    />
+                                    {error.password2 && <div className="invalid-feedback">{error.password2}</div>}
                                  </div>
                                  <button className="btn btn-success btn-sm">Register</button>
                             </form>
@@ -94,4 +107,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, {register}) (Register)
+export default connect(mapStateToProps, { register })(Register)
