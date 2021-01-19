@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react';
+import { register } from '../store/actions/authAction';
 
 
 export class Register extends Component {
@@ -20,6 +22,8 @@ export class Register extends Component {
 
     submitHandler = event => {
         event.preventDefault()
+        let { username, email, password, password2 } = this.state
+        this.props.register({username, email, password, password2})
     }
 
     render() {
@@ -86,4 +90,8 @@ export class Register extends Component {
     }
 }
 
-export default Register
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
+export default connect(mapStateToProps, {register}) (Register)
