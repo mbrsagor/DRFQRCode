@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { listTypes } from '../store/actions/typeAction';
 import NotFound from '../components/NotFound';
@@ -26,6 +27,7 @@ class Dashboard extends Component {
                                 </div>
                                 <div className="col-md-5 text-right">
                                     <button className="btn btn-success btn-sm">Add New</button>
+                                    <p><Link className="btn btn-default"to='/'>Back</Link></p>
                                 </div>
                             </div>
                         </div>
