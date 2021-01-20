@@ -24,7 +24,7 @@ export const register = (user, history) => (dispatch) => {
 export const login = (user, history) => (dispatch) => {
     Axios.post('http://127.0.0.1:8000/api/token/', user)
         .then(res => {
-        //    console.log(res);
+           console.log(res.data);
             let token = res.data.access;
             localStorage.setItem('auth_token', token)
             setAuthToken(token)
@@ -35,7 +35,7 @@ export const login = (user, history) => (dispatch) => {
                     user: decode
                 }
             })
-            history.push('/')
+            history.push('/dashboard')
         })
         .catch(error => {
             // console.log(error.response.data)
