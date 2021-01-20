@@ -5,6 +5,11 @@ import { logout } from '../store/actions/authAction';
 
 
 class Home extends Component {
+
+    componentDidMount() {
+        document.title = "Homepage";
+    }
+
     render() {
         return (
             <div>

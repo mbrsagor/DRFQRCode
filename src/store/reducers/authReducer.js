@@ -1,10 +1,10 @@
-import * as Types from '../actions/types'
+import * as Types from "../actions/types";
 
 const init = {
-    isAuthenticated: false,
-    user: {},
-    error: {}
-}
+  isAuthenticated: false,
+  user: {},
+  error: {},
+};
 
 const authReducer = (state = init, action) => {
   switch (action.type) {
