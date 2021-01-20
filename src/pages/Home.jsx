@@ -12,15 +12,29 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
-                <h2>I'm home page</h2>
-                {
-                    this.props.auth.isAuthenticated
-                    ?
-                    <button onClick={() => this.props.logout(this.props.history)} className="btn btn-danger btn-sm">Logout</button>
-                    :
-                    <Link to='/login' className="btn btn-success btn-sm">Login</Link>
-                }
+            <div className="card text-center">
+                <div className="card-header">
+                    <h4 className="card-title">Welcome to our homepage</h4>
+                    <p>Python, Django, React-Redux web application for job coding test</p>
+                </div>
+                <div className="card-body">
+                    {
+                        this.props.auth.isAuthenticated
+                        ?
+                        <div>
+                            <h1>Our application is development running</h1>
+                            <h4>We will get back soon!</h4>
+                            <hr/>
+                            <button onClick={() => this.props.logout(this.props.history)} className="btn btn-danger btn-sm">Logout</button>
+                            <Link to='/dashboard' className="btn btn-success btn-sm ml-3">Dashboard</Link>
+                        </div>
+                        :
+                        <Link to='/login' className="btn btn-success btn-sm">Login</Link>
+                    }
+                </div>
+                <div className="card-footer">
+                    <p className="text">&copy; 2021 All rights reserved. Developed by Sagor</p>
+                </div>
             </div>
         )
     }
