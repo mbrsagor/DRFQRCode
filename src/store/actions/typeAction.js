@@ -20,6 +20,7 @@ export const listTypes = () => (dispatch) => {
 export const createNewType = (types) => (dispatch) => {
   Axios.post("http://127.0.0.1:8000/api/types/", types)
     .then((res) => {
+      alert("Data created successfuly")
       dispatch({
         type: Types.CREATE_TYPE,
         payload: {

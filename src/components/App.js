@@ -5,13 +5,13 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Dashboard from "../pages/Dashboard";
-import Nav from './Nav';
+import Header from './Header';
 
 const App = () => {
   return (
     <BrowserRouter>
       <div className="container mt-3">
-        <Nav />
+        <Header />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
