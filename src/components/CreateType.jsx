@@ -90,6 +90,4 @@ class CreateType extends Component {
     }
 }
 
-
-
 export default connect(null, {createNewType}) (CreateType)

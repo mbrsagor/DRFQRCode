@@ -8,6 +8,11 @@ const typeReducer = (state = [], action) => {
       let results = [...state];
       results.unshift(action.payload.types);
       return results;
+    case Type.REMOVE_TYPE:
+      let types = [...state]
+      return types.filter(type => {
+        return type.id !==action.payload.id
+      })
     default:
       return state;
   }

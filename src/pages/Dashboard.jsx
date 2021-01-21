@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { listTypes } from '../store/actions/typeAction';
+import { listTypes, removeType } from '../store/actions/typeAction';
 import NotFound from '../components/NotFound';
 import CreateType from '../components/CreateType';
 
@@ -75,7 +75,7 @@ class Dashboard extends Component {
                                                     Update
                                                 </button>
                                                 <button
-                                                    onClick={() => console.log("Deleted")}
+                                                    onClick={() => this.props.removeType(type.id)}
                                                     className="btn btn-danger ml-2 btn-sm">
                                                     Delete
                                                 </button>
@@ -99,4 +99,4 @@ const mapStateToProps = state => ({
     types: state.types
 })
 
-export default connect(mapStateToProps, {listTypes}) (Dashboard)
+export default connect(mapStateToProps, {listTypes, removeType}) (Dashboard)
