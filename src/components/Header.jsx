@@ -8,8 +8,6 @@ class Header extends Component {
   render() {
     let { auth } = this.props;
 
-    console.log(auth);
-
     return (
       <nav className="nav navbar-expand-lg navbar-inverse navbar-dark navbar-fixed-top bg-dark">
         <Link to="/">

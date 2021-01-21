@@ -17,7 +17,7 @@ export class Navbar extends Component {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/" activeClassName="active">
+            <NavLink to="/profile" activeClassName="active">
               <span className="nav-link">Profile</span>
             </NavLink>
           </li>

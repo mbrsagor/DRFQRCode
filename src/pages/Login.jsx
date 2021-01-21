@@ -12,6 +12,10 @@ export class Login extends Component {
         error: {}
     }
 
+    componentDidMount() {
+        document.title = "Login page"
+    }
+
     chagneHandler = event => {
         this.setState({
             [event.target.name]: event.target.value

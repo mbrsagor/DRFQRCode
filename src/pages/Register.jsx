@@ -14,6 +14,10 @@ export class Register extends Component {
         error: {}
     }
 
+    componentDidMount() {
+        document.title = "Registration page"
+    }
+
     chagneHandler = event => {
         this.setState({
             [event.target.name]: event.target.value
