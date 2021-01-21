@@ -3,10 +3,23 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { listTypes } from '../store/actions/typeAction';
 import NotFound from '../components/NotFound';
+import CreateType from '../components/CreateType';
 
 
 class Dashboard extends Component {
 
+    state = {
+        createMoalOpen : false
+    }
+
+    oepnCreateMoal = () => {
+        this.setState({ createMoalOpen: true });
+    }
+
+    closeCreateMoal = () => {
+        this.setState({ createMoalOpen: false });
+    }
+    
     componentDidMount() {
         document.title = "Dashboard";
         this.props.listTypes()
@@ -26,7 +39,14 @@ class Dashboard extends Component {
                                     <p>User ID: {auth.user.user_id}</p>
                                 </div>
                                 <div className="col-md-5 text-right">
-                                    <button className="btn btn-success btn-sm">Add New</button>
+                                    <button
+                                        onClick={this.oepnCreateMoal}
+                                        className="btn btn-success btn-sm"
+                                    >Add New</button>
+                                    <CreateType
+                                        close={this.closeCreateMoal}
+                                        isOpen={this.state.createMoalOpen}
+                                    />
                                     <p><Link className="btn btn-default"to='/'>Back</Link></p>
                                 </div>
                             </div>
