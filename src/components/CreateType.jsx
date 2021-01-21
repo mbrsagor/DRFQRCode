@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-
-
+import { connect } from 'react-redux';
+import { createNewType } from '../store/actions/typeAction';
 
 
 const customStyles = {
@@ -21,13 +21,23 @@ class CreateType extends Component {
     state = {
         title: '',
         color: '',
-        is_active: false,
+        is_active: true,
         isOpen: false
     }
 
     chagneHandler = event => {
-        event.preventDefault()
         this.setState({[event.target.name]: event.target.value})
+    }
+
+    submitHandler = event => {
+        event.preventDefault()
+        this.props.createNewType(this.state)
+        this.setState({
+            title: '',
+            color: '',
+            is_active: true
+        })
+        console.log("Save")
     }
 
 
@@ -39,7 +49,7 @@ class CreateType extends Component {
                 isOpen={this.props.isOpen}
                 onRequestClose={this.props.close}
             >
-                <form>
+                <form onSubmit={this.submitHandler}>
                     <h4 className="card-title">Create new Type</h4>
                     <div className="form-group">
                         <label htmlFor="title">Enter Type Title</label>
@@ -80,4 +90,6 @@ class CreateType extends Component {
     }
 }
 
-export default CreateType
+
+
+export default connect(null, {createNewType}) (CreateType)
