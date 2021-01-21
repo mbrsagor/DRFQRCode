@@ -23,7 +23,11 @@ export class Navbar extends Component {
               <span className="nav-link">Profile</span>
             </NavLink>
           </li>
-          <button onClick={() => this.props.logout(this.props.history)} className="btn btn-danger btn-sm">Logout</button>
+          <li className="nav-item">
+            <button className="btn btn-default btn-sm"onClick={() => this.props.logout(this.props.history)}>
+              <span className="nav-link">Logout</span>
+            </button>
+          </li>
         </ul>
       </div>
     );
