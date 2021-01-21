@@ -4,20 +4,31 @@ import { connect } from 'react-redux';
 import { listTypes, removeType } from '../store/actions/typeAction';
 import NotFound from '../components/NotFound';
 import CreateType from '../components/CreateType';
+import UpdateType from "../components/UpdateType";
 
 
 class Dashboard extends Component {
 
     state = {
-        createMoalOpen : false
+        createMoalOpen : false,
+        updateMoalOpen: false,
+        id: ''
     }
 
     oepnCreateMoal = () => {
         this.setState({ createMoalOpen: true });
     }
 
+    oepnUpdateMoal = id => {
+        this.setState({ updateMoalOpen: true, id });
+    }
+
     closeCreateMoal = () => {
         this.setState({ createMoalOpen: false });
+    }
+
+    closeUpdateMoal = id => {
+        this.setState({ updateMoalOpen: false, id: '' });
     }
     
     componentDidMount() {
@@ -69,9 +80,17 @@ class Dashboard extends Component {
                                             <td>{type.color}</td>
                                             <td> {type.is_active ? <span className="bg-success p-1 text-light">active</span> : <span className="bg-warning p-1 text-light">Deactive</span>}</td>
                                             <td>{type.created_at}</td>
+                                            {
+                                                this.state.id === type.id ?
+                                                    <UpdateType
+                                                    close={this.closeUpdateMoal}
+                                                    isOpen={this.state.createMoalOpen}
+                                                    type={type}
+                                                     />: null
+                                            }
                                             <td>
                                                 <button
-                                                    onClick={() => console.log("Updated")} className="btn btn-info btn-sm">
+                                                    onClick={() => this.oepnUpdateMoal(type.id)} className="btn btn-info btn-sm">
                                                     Update
                                                 </button>
                                                 <button

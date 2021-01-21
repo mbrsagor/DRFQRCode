@@ -33,8 +33,25 @@ export const createNewType = (types) => (dispatch) => {
     });
 };
 
-export const removeType = (id) => (dispatch) => {
-  Axios.delete(`http://127.0.0.1:8000/api/types/${id}`)
+
+export const updateTypes = (id, types) => (dispatch) => {
+  Axios.put(`http://127.0.0.1:8000/api/types/${id}/`, types)
+    .then((res) => {
+      console.log(res.data);
+      dispatch({
+        type: Types.UPDATE_TYPE,
+        payload: {
+          types: res.data.types,
+        },
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+}
+
+export const removeType = id => (dispatch) => {
+  Axios.delete(`http://127.0.0.1:8000/api/types/${id}/`)
     .then((res) => {
       dispatch({
         type: Types.REMOVE_TYPE,
