@@ -1,13 +1,14 @@
-import * as Types from "./types";
 import Axios from "axios";
 import jwtDecode from "jwt-decode";
+import { BASE_URL } from '../../urls';
 import setAuthToken from '../../utils/setAuthToken';
+import * as Types from "./types";
 
 
 export const register = (user, history) => (dispatch) => {
-  Axios.post("http://127.0.0.1:8000/api/register", user)
+  Axios.post("register", user)
     .then((res) => {
-      history.push("/login");
+      history.push(`${BASE_URL}/login`);
       console.log(res.data);
     })
     .catch((error) => {
@@ -22,7 +23,7 @@ export const register = (user, history) => (dispatch) => {
 };
 
 export const login = (user, history) => (dispatch) => {
-    Axios.post('http://127.0.0.1:8000/api/token/', user)
+    Axios.post(`${BASE_URL}/token/`, user)
         .then(res => {
            console.log(res.data);
             let token = res.data.access;
