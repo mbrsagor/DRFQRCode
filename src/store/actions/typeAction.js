@@ -1,8 +1,9 @@
-import * as Types from "./types";
 import Axios from "axios";
+import { BASE_URL } from '../../urls';
+import * as Types from "./types";
 
 export const listTypes = () => (dispatch) => {
-  Axios.get("http://127.0.0.1:8000/api/types/")
+  Axios.get(`${BASE_URL}/types/`)
     .then((res) => {
       // console.log(res.data)
       dispatch({
@@ -18,7 +19,7 @@ export const listTypes = () => (dispatch) => {
 };
 
 export const createNewType = (types) => (dispatch) => {
-  Axios.post("http://127.0.0.1:8000/api/types/", types)
+  Axios.post(`${BASE_URL}/types/`, types)
     .then((res) => {
       alert("Data created successfuly")
       dispatch({
@@ -35,7 +36,7 @@ export const createNewType = (types) => (dispatch) => {
 
 
 export const updateTypes = (id, types) => (dispatch) => {
-  Axios.put(`http://127.0.0.1:8000/api/types/${id}/`, types)
+  Axios.put(`${BASE_URL}/types/${id}/`, types)
     .then((res) => {
       console.log(res.data);
       dispatch({
@@ -51,7 +52,7 @@ export const updateTypes = (id, types) => (dispatch) => {
 }
 
 export const removeType = id => (dispatch) => {
-  Axios.delete(`http://127.0.0.1:8000/api/types/${id}/`)
+  Axios.delete(`${BASE_URL}/types/${id}/`)
     .then((res) => {
       dispatch({
         type: Types.REMOVE_TYPE,
