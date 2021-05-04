@@ -1,9 +1,14 @@
 # Homework money management App
 > The project is frontend React Redux application which bakcend use python popular web framework like Django.
 
-In the project directory, you can run:
+In the project directory, you can run the below commands:
 
-### `yarn start`
+```
+git clone https://github.com/mbrsagor/homework-frontend.git
+cd homework-frontend
+yarn install
+yarn start
+```
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
