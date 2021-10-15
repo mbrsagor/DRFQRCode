@@ -15,14 +15,17 @@ class Dashboard extends Component {
         id: ''
     }
 
+    // Modal open
     oepnCreateMoal = () => {
         this.setState({ createMoalOpen: true });
     }
 
+    // Update modal
     oepnUpdateMoal = id => {
         this.setState({ updateMoalOpen: true, id });
     }
 
+    // Close modal
     closeCreateMoal = () => {
         this.setState({ createMoalOpen: false });
     }
