@@ -5,7 +5,6 @@ import * as Types from "./types";
 export const listTypes = () => (dispatch) => {
   Axios.get(`${BASE_URL}/types/`)
     .then((res) => {
-      // console.log(res.data)
       dispatch({
         type: Types.LOAD_TYPE,
         payload: {
