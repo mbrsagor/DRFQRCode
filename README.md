@@ -30,8 +30,8 @@ GRANT ALL PRIVILEGES ON DATABASE qrcode TO dev;
 > Clone project: Open your terminal and run the below commands.
 
 ```
-https://github.com/rackinup/RackinUP-Web.git
-cd RackinUP
+https://github.com/mbrsagor/DRFQRCode.git
+cd DRFQRCode
 ```
 
 ####### Step 3:
@@ -54,6 +54,11 @@ pip install -r requirements.txt
 ./manage.py migrate
 ./manage.py createsuperuser
 ./mangae.py runserver
+```
+
+###### Install QR code if newly want.
+```bash
+pip install qrcode 
 ```
 
 ## Happy coding :wink:
