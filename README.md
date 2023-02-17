@@ -13,20 +13,6 @@ The following steps will walk you thru installation on a Mac. I think, Linux sho
  
 
 ###### Step 1:
-> Create database: Open your terminal and run the below commands.
-
-```bash
-psql postgres
-CREATE DATABASE qrcode
-CREATE USER dev WITH PASSWORD 'password';
-ALTER ROLE dev SET client_encoding TO 'utf8';
-ALTER ROLE dev SET default_transaction_isolation TO 'read committed';
-ALTER ROLE dev SET timezone TO 'UTC';
-GRANT ALL PRIVILEGES ON DATABASE qrcode TO dev;
-\q
-```
-
-###### Step 2:
 > Clone project: Open your terminal and run the below commands.
 
 ```
@@ -34,16 +20,7 @@ https://github.com/mbrsagor/DRFQRCode.git
 cd DRFQRCode
 ```
 
-####### Step 3:
-> Then copy code from the ``.sample_env`` and create new file `.env` then pasts
-
--------------------------------------------
-```bash
-|--> .sample_env
-|--> .env
-```
-
-###### Step 4:
+###### Step 2:
 > Run the application in your local development server:
 
 ```bash
