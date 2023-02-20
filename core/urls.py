@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import QRCodeGenerateAPIView
+from . import views
 
 urlpatterns = [
-    path('qrcode-generate/', QRCodeGenerateAPIView.as_view()),
+    path('qrcode-generate/', views.QRCodeGenerateAPIView.as_view()),
 ]
