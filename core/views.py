@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework import generics, status, permissions, views
 
+from messages import *
 from utils import generate_qr
 from core.serializers import QrCodeSerializer, LoginSerializer
 
@@ -28,7 +29,7 @@ class LoginAPIView(generics.CreateAPIView):
         none_check = username or password is None
         empty_check = username or password is ''
         if (none_check or empty_check) is True:
-            return Response(data={"message": "Username and password required"},
+            return Response(data={"message": ACCESS_REQUIRED},
                             status=status.HTTP_401_UNAUTHORIZED)
         get_password = User.objects.get(username__exact=username).password
         password_check = check_password(password, get_password)
@@ -45,7 +46,7 @@ class LoginAPIView(generics.CreateAPIView):
                 )
         else:
             return Response(
-                data={"message": "Username or password incorrect"},
+                data={"message": INVALID_ACCESS},
                 status=status.HTTP_401_UNAUTHORIZED
             )
 
@@ -57,7 +58,7 @@ class LogoutAPIView(views.APIView):
         # simply delete the session information
         request.session.flush()
         return Response(
-            data={"message": "You are logged out."},
+            data={"message": LOGOUT},
             status=status.HTTP_200_OK)
 
 
