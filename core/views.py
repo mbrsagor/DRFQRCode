@@ -1,19 +1,24 @@
+# Default django
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.hashers import check_password
 
+# Django rest framework
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework import generics, status, permissions, views
 
+# Custom
 from messages import *
 from utils import generate_qr
-from core.serializers import QrCodeSerializer, LoginSerializer
+from core import serializers
 
 
 class LoginAPIView(generics.CreateAPIView):
     """
+    Name: Login API
     POST auth/login/
+    Method: POST
     """
 
     # This permission class will override the global permission
@@ -21,7 +26,7 @@ class LoginAPIView(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
     queryset = User.objects.all()
     throttle_classes = ''
-    serializer_class = LoginSerializer
+    serializer_class = serializers.LoginSerializer
 
     def post(self, request, *args, **kwargs):
         username = request.data.get("username", None)
@@ -52,6 +57,12 @@ class LoginAPIView(generics.CreateAPIView):
 
 
 class LogoutAPIView(views.APIView):
+    """
+    Name: Logout API
+    Desc: Here, is uses simple token when `logout` API will cal token will destroy.
+    POST auth/logout/
+    Method: GET
+    """
     permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request):
@@ -66,16 +77,17 @@ class QRCodeGenerateAPIView(generics.CreateAPIView):
     """
     QR code generated API
     URL: /api/v1/catalogue/qrcode-generate/
+    Method: POST
     :param
     text
     """
-    serializer_class = QrCodeSerializer
+    serializer_class = serializers.QrCodeSerializer
     queryset = ''
 
     def post(self, request, *args, **kwargs):
         text = request.data['text']
         output = generate_qr(text)
-        result = QrCodeSerializer(output).data
+        result = serializers.QrCodeSerializer(output).data
         return Response(
             data=result,
             status=status.HTTP_201_CREATED

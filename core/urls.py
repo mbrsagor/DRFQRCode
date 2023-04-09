@@ -6,5 +6,5 @@ urlpatterns = [
     path('qrcode-generate/', views.QRCodeGenerateAPIView.as_view()),
     # Auth
     path('login/', views.LoginAPIView.as_view()),
-    path('logoout/', views.LogoutAPIView.as_view()),
+    path('logout/', views.LogoutAPIView.as_view()),
 ]
