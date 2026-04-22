@@ -38,4 +38,21 @@ pip install -r requirements.txt
 pip install qrcode 
 ```
 
+```python
+import redis
+
+r = redis.Redis(host='localhost', port=6379, decode_responses=True)
+
+r.json().set('user:1', '$', {
+    'name': 'Alice',
+    'emails': ['alice@example.com', 'alice@work.com'],
+    'address': {'city': 'NYC', 'zip': '10001'}
+})
+
+print(r.json().get('user:1', '$'))            # [{'name': 'Alice', 'emails': [...], 'address': {...}}]
+print(r.json().get('user:1', '$.name'))       # ['Alice']
+print(r.json().get('user:1', '$.emails[0]'))  # ['alice@example.com']
+print(r.json().get('user:1', '$.address.zip'))# ['10001']
+```
+
 ## Happy coding :wink:
